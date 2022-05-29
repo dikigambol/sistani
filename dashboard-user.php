@@ -18,7 +18,7 @@
 </head>
 
 <?php
-    include 'baseUrl.php';
+include 'baseUrl.php';
 ?>
 
 <body id="page-top">
@@ -51,16 +51,18 @@
                                         Diki Akbar
                                     </b>
                                 </p>
-                                <p style="font-size: 15px; color: grey; margin-top: -20px;">
+                                <p style="font-size: 15px; color: grey; margin-top: -18px;">
                                     <i class="mdi mdi-corn"></i> sinar tani
                                 </p>
                             </div>
                             <div class="navmenu">
                                 <ul class="navbar-nav ms-auto my-2 my-lg-0">
                                     <li class="nav-item"><a class="nav-link nav-dash" href="dashboard-user.php" id="homeNav"><i class="mdi mdi-account-circle"></i> &nbsp;Akun Saya</a></li>
+                                    <li class="nav-item"><a class="nav-link nav-dash" id="keltaniNav" href="dashboard-user.php?page=keltani"><i class="mdi mdi-account-multiple-outline"></i> &nbsp;Kelompok Tani</a></li>
                                     <li class="nav-item"><a class="nav-link nav-dash" href="dashboard-user.php?page=thread"><i class="mdi mdi-comment-multiple-outline"></i> &nbsp;Thread Saya</a></li>
                                     <li class="nav-item"><a class="nav-link nav-dash" href="dashboard-user.php?page=jadwal"><i class="mdi mdi-calendar"></i> &nbsp;Jadwal</a></li>
-                                    <li class="nav-item"><a class="nav-link nav-dash" href=""><i class="mdi mdi-human-greeting"></i> &nbsp;List Bantuan</a></li>
+                                    <li class="nav-item"><a class="nav-link nav-dash" href="dashboard-user.php?page=bantuan"><i class="mdi mdi-ticket"></i> &nbsp;List Bantuan</a></li>
+                                    <li class="nav-item"><a class="nav-link nav-dash" href="auth/proses_login.php?type=logout"><i class="mdi mdi-logout-variant"></i> &nbsp;Keluar</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -105,6 +107,30 @@
                     "sNext": ">",
                     "sPrevious": "<"
                 }
+            }
+        });
+    });
+</script>
+
+<script>
+    $('.empty-box-bantuan').hide()
+    $("#searchbantuan").keyup(function() {
+        var filter = $(this).val(),
+            count = 0;
+        if (count == 0) {
+            $('.empty-box-bantuan').hide()
+        }
+        $('.listbantuan .card').each(function() {
+            if ($(this).find('.card-title').text().search(new RegExp(filter, "i")) < 0) {
+                $(this).hide();
+                if (count == 0) {
+                    $('.empty-box-bantuan').show()
+                } else {
+                    $('.empty-box-bantuan').hide()
+                }
+            } else {
+                $(this).show();
+                count++;
             }
         });
     });

@@ -11530,13 +11530,14 @@ header.masthead h1, header.masthead .h1 {
 table th {
   background-color: #97c918 !important;
   color: white !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
   padding: 8px 15px !important;
-  border-bottom: 1px solid green !important;
+  border-bottom: 2px solid #6f9908 !important;
+  font-weight: normal !important;
 }
 
 table td {
-  font-size: 14px !important;
+  font-size: 13px !important;
   padding: 8px 15px !important;
 }
 
@@ -11566,3 +11567,75 @@ div.dataTables_wrapper div.dataTables_filter {
   margin-bottom: 20px;
   padding: 0px 15px;
 }
+
+.badge-aktif {
+  background-color: #5cd42c; color: white; padding: 4px 12px; border-radius: 30px;
+}
+
+.badge-non-aktif {
+  background-color: #cf303d; color: white; padding: 4px 12px; border-radius: 30px;
+}
+
+.link-kel-tani {
+  text-decoration: none; font-size: 14px; color: black;
+}
+
+.btn-setting {
+  text-decoration: none;
+  background-color: #97c918;
+  padding: 4px 12px;
+  border-radius: 8px;
+  color: white;
+}
+
+.btn-setting:hover {
+  background-color: #46a122;
+  color: white;
+}
+
+.bg-dash {
+  width: 60%;
+  margin-top: -50px;
+  margin-bottom: -25px;
+  display: none;
+  margin-left: auto;
+}
+
+@media (min-width: 992px) {
+  .bg-dash {
+    display: block;
+  }
+}
+
+.card-biru {
+  padding: 8px 10px !important; 
+  background: linear-gradient(90deg,#7da0fa,#2e66f5 99%); 
+  box-shadow: none; color: white; 
+  padding-left: 15px !important; 
+  padding-right: 15px !important;
+}
+
+.card-ungu {
+  padding: 8px 10px !important; 
+  background: linear-gradient(90deg,#6f6fd5,#4747a1 99%);
+  box-shadow: none; color: white; 
+  padding-left: 15px !important; 
+  padding-right: 15px !important;
+}
+
+.card-hijau {
+  padding: 8px 10px !important; 
+  background: linear-gradient(90deg,#6ae793,#2ec877 99%);
+  box-shadow: none; color: white; 
+  padding-left: 15px !important; 
+  padding-right: 15px !important;
+}
+
+.card-merah {
+  background: linear-gradient(90deg,#f77277,#ff474f 99%);
+  padding: 8px 10px !important; 
+  box-shadow: none; color: white; 
+  padding-left: 15px !important; 
+  padding-right: 15px !important;
+}
+

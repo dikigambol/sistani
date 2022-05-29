@@ -17,6 +17,15 @@
     <link href="assets/css/styles.css" rel="stylesheet" />
 </head>
 
+<?php
+session_start();
+$isLogin = $_SESSION['isLogin'] ?? '';
+$level = $_SESSION['level'] ?? '';
+if ($isLogin != "logged") {
+    header("location: index.php");
+}
+?>
+
 <body id="page-top">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 navbar-shrink" id="mainNav">
@@ -25,9 +34,12 @@
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="index.php#mainNav">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link active" href="forum.php">Forum</a></li>
-                    <li class="nav-item"><a class="nav-link" href="dashboard-user.php">Dashboard</a></li>
+                    <?php if ($level == "admin desa") { ?>
+                        <li class="nav-item"><a class="nav-link" href="dashboard-admin.php">Dashboard</a></li>
+                    <?php } else { ?>
+                        <li class="nav-item"><a class="nav-link" href="dashboard-user.php">Dashboard</a></li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
@@ -55,6 +67,9 @@
                     <div class="mb-4">
                         <p><i class="mdi mdi-account-location"></i> &nbsp;<b>Diki Akbar</b></p>
                         <p style="margin-top: -15px;">dummy comment</p>
+                        <a href="" style="text-decoration: none;">
+                            <p style="font-size: 14px; margin-top: -12px;" class="text-danger"><i class="mdi mdi-eraser"></i> hapus</p>
+                        </a>
                     </div>
                     <hr>
                     <p style="margin-bottom: 10px; font-size: 14px;">Tulis tanggapan anda :</p>

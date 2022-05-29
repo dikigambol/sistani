@@ -14,7 +14,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/mdi/css/materialdesignicons.css">
     <link href="assets/css/styles.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.css" rel="stylesheet">
+    </link>
 </head>
+
+<?php
+session_start();
+$status = $_SESSION['status'] ?? '';
+$level = $_SESSION['level'] ?? '';
+$isLogin = $_SESSION['isLogin'] ?? '';
+if ($isLogin == "logged") {
+    if ($level == "admin desa") {
+        header("location: dashboard-admin.php");
+    } else {
+        header("location: dashboard-user.php");
+    }
+}
+?>
 
 <body id="page-top">
     <!-- Navigation-->
@@ -25,8 +41,13 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto my-2 my-lg-0">
                     <li class="nav-item"><a class="nav-link" href="#mainNav">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="forum.php">Forum</a></li>
-                    <li class="nav-item"><a class="nav-link" href="dashboard-user.php">Dashboard</a></li>
+                    <?php if ($status == "logged") { ?>
+                        <li class="nav-item"><a class="nav-link" href="forum.php">Forum</a></li>
+                        <li class="nav-item"><a class="nav-link" href="dashboard-user.php">Dashboard</a></li>
+                    <?php } else { ?>
+                        <li class="nav-item"><a class="nav-link" onclick="alertLogin()" href="#">Forum</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#login">login</a></li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
@@ -36,7 +57,7 @@
         <div class="container px-4 px-lg-5 custom-header" style="margin-top: 90px;">
             <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
                 <div class="col-lg-8 align-self-end">
-                    <img src="assets/favicon.png" alt="" style="width: 12%; margin-bottom: 20px;">
+                    <img src="assets/logo.png" alt="" style="width: 12%; margin-bottom: 20px;">
                     <h1 class="text-white font-weight-bold">Sistem Informasi Tani</h1>
                     <hr class="divider" />
                 </div>
@@ -62,17 +83,20 @@
             </div>
             <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
                 <div class="col-lg-6">
-                    <form id="contactForm">
+                    <form method="POST" action="auth/proses_login.php?type=login">
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="name" type="text" placeholder="Enter your username" data-sb-validations="required" />
+                            <input name="username" class="form-control" type="text" placeholder="Enter your username" />
                             <label for="name">Username</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="pass" type="password" placeholder="Enter your password" />
+                            <input name="password" class="form-control" type="password" placeholder="Enter your password" />
                             <label for="pass">Password</label>
                         </div>
-                        <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit">Sign
-                                In</button></div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-xl" id="submitButton" type="submit">
+                                Sign In
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -95,6 +119,35 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
 </body>
+
+<?php if ($status == 'gagal') { ?>
+    <script>
+        swal({
+            title: "Gagal!",
+            type: "error",
+            text: 'Redirecting...',
+            timer: 2000,
+            showConfirmButton: false,
+            showCancelButton: false
+        });
+    </script>
+<?php } ?>
+
+<?php unset($_SESSION['status']); ?>
+
+<script>
+    alertLogin = () => {
+        swal({
+            title: "Silahkan login",
+            type: "info",
+            text: 'login untuk mengakses halaman forum.',
+            timer: 2000,
+            showConfirmButton: false,
+            showCancelButton: false
+        })
+    }
+</script>
 
 </html>

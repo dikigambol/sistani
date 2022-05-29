@@ -11,73 +11,43 @@
 <div class="mt-4 row">
     <div class="col-lg-6 mb-3">
         <p>
-            <b>Nama Lengkap</b><br />
+            <b><i class="mdi mdi-account-box"></i> Nama Lengkap</b><br />
             Diki Akbar
         </p>
     </div>
     <div class="col-lg-6 mb-3">
         <p>
-            <b>NIK</b><br />
+            <b><i class="mdi mdi-account-card-details"></i> NIK</b><br />
             Diki Akbar
         </p>
     </div>
     <div class="col-lg-6 mb-3">
         <p>
-            <b>Tempat & Tanggal Lahir</b><br />
+            <b><i class="mdi mdi-calendar-range"></i> Tempat & Tanggal Lahir</b><br />
             Diki Akbar
         </p>
     </div>
     <div class="col-lg-6 mb-3">
         <p>
-            <b>Gender</b><br />
+            <b><i class="mdi mdi-gender-male-female"></i> Gender</b><br />
             Diki Akbar
         </p>
     </div>
     <div class="col-lg-6 mb-3">
         <p>
-            <b>Alamat</b><br />
+            <b><i class="mdi mdi-map-marker"></i> Alamat</b><br />
             Diki Akbar
         </p>
     </div>
     <div class="col-lg-6 mb-3">
         <p>
-            <b>RT/RW</b><br />
+            <b><i class="mdi mdi-phone"></i> Telepon</b><br />
             Diki Akbar
         </p>
     </div>
     <div class="col-lg-6 mb-3">
         <p>
-            <b>Desa</b><br />
-            Diki Akbar
-        </p>
-    </div>
-    <div class="col-lg-6 mb-3">
-        <p>
-            <b>Kecamatan</b><br />
-            Diki Akbar
-        </p>
-    </div>
-    <div class="col-lg-6 mb-3">
-        <p>
-            <b>Kota</b><br />
-            Diki Akbar
-        </p>
-    </div>
-    <div class="col-lg-6 mb-3">
-        <p>
-            <b>Provinsi</b><br />
-            Diki Akbar
-        </p>
-    </div>
-    <div class="col-lg-6 mb-3">
-        <p>
-            <b>Telepon</b><br />
-            Diki Akbar
-        </p>
-    </div>
-    <div class="col-lg-6 mb-3">
-        <p>
-            <b>Email</b><br />
+            <b><i class="mdi mdi-email"></i> Email</b><br />
             Diki Akbar
         </p>
     </div>
