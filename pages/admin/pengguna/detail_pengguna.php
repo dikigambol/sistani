@@ -6,7 +6,17 @@ $data = $query->fetch_array();
 
 $sql2 = "SELECT * FROM detail_user LEFT JOIN jenis_kelamin ON detail_user.id_jk = jenis_kelamin.id_jk WHERE detail_user.id_pengguna = $id";
 $query2 = $koneksi->query($sql2);
-$data2 = $query2->fetch_array()
+$data2 = $query2->fetch_array();
+
+function formatTanggal($date)
+{
+    if ($date != "") {
+        $datetime = DateTime::createFromFormat('Y-m-d', $date);
+        return $datetime->format('d M Y');
+    } else {
+        return "-";
+    }
+}
 ?>
 
 <p style="font-size: 20px;">
@@ -29,7 +39,7 @@ $data2 = $query2->fetch_array()
     <div class="col-lg-6 mb-3">
         <p>
             <b><i class="mdi mdi-calendar-range"></i> Tempat & Tanggal Lahir</b><br />
-            <?php echo $data2['tempat_lahir'] ?? "-" ?>, <?php echo $data2['tanggal_lahir'] ?? "-" ?>
+            <?php echo $data2['tempat_lahir'] ?? "-" ?>, <?php echo formatTanggal($data2['tanggal_lahir']) ?? "-" ?>
         </p>
     </div>
     <div class="col-lg-6 mb-3">
@@ -41,8 +51,8 @@ $data2 = $query2->fetch_array()
     <div class="col-lg-6 mb-3">
         <p>
             <b><i class="mdi mdi-map-marker"></i> Alamat</b><br />
-            <?php echo $data2['alamat'] ?? "-" ?> <?php echo $data2['rt_rw'] ?? "-" ?>, <?php echo $data2['desa'] ?? "-" ?>, 
-            <?php echo $data2['kecamatan'] ?? "-" ?>, <?php echo $data2['kota'] ?? "-" ?>
+            <?php echo $data2['alamat'] ?? "-" ?> <?php echo $data2['rt_rw'] ?? "-" ?>, <?php echo $data2['desa'] ?? "-" ?>,
+            <?php echo $data2['kecamatan'] ?? "-" ?>, <?php echo $data2['kota'] ?? "-" ?>, <?php echo $data2['provinsi'] ?? "-" ?>
         </p>
     </div>
     <div class="col-lg-6 mb-3">

@@ -63,7 +63,7 @@ $data = $query->fetch_array()
         </div>
         <div class="col-lg-4 mb-4">
             <p><b>RT/RW</b></p>
-            <input type="text" class="form-control" style="margin-top: -5px;" name="rtrw" placeholder="ex. rt 3/rw 5" value="<?php echo $data['rt_rw'] ?? "" ?>">
+            <input type="text" class="form-control" style="margin-top: -5px;" name="rtrw" placeholder="ex. RT.3/RW.5" value="<?php echo $data['rt_rw'] ?? "" ?>">
         </div>
         <div class="col-lg-4 mb-4">
             <p><b>Desa</b></p>

@@ -108,7 +108,7 @@ $query3 = $koneksi->query($sql3);
                         <?php if ($data['jabatan'] != "ketua") { ?>
                             <div class="mb-1">
                                 <form action="<?php echo $base_url ?>pages/admin/kelompokTani/kt_anggota.php" method="POST">
-                                    <input type="hidden" name="id_user" value="<?php echo $data['id_pengguna'] ?>">
+                                    <input type="hidden" name="id_user" value="<?php echo $data['id_user'] ?>">
                                     <input type="hidden" name="id_keltani" value="<?php echo $id ?>">
                                     <button class="btn btn-primary btn-sm" style="width: 65px;">ketua</button>
                                 </form>
@@ -116,7 +116,7 @@ $query3 = $koneksi->query($sql3);
                         <?php } ?>
                         <div>
                             <form action="<?php echo $base_url ?>pages/admin/kelompokTani/k_anggota.php" method="POST">
-                                <input type="hidden" name="id_user" value="<?php echo $data['id_pengguna'] ?>">
+                                <input type="hidden" name="id_user" value="<?php echo $data['id_user'] ?>">
                                 <button onclick="return confirm('Anda yakin ingin mengeluarkan user ini?')" class="btn btn-danger btn-sm" style="width: 65px;">keluar</button>
                             </form>
                         </div>

@@ -1,7 +1,13 @@
 <?php
-$sql = "SELECT * FROM bantuan";
+$sql = "SELECT * FROM bantuan ORDER BY tgl_bantuan DESC";
 $query = $koneksi->query($sql);
 $no = 1;
+
+function formatTanggal($date)
+{
+    $datetime = DateTime::createFromFormat('Y-m-d', $date);
+    return $datetime->format('d M Y');
+}
 ?>
 
 <p style="font-size: 20px;">
@@ -65,12 +71,12 @@ $no = 1;
                 <tr>
                     <td><?php echo $no++ ?></td>
                     <td>
-                        <a class="link-kel-tani" href="<?php echo $base_url ?>dashboard-admin.php?page=detailbantuan&id=<?php echo $data['id_bantuan']?>" title="lihat detail">
+                        <a class="link-kel-tani" href="<?php echo $base_url ?>dashboard-admin.php?page=detailbantuan&id=<?php echo $data['id_bantuan'] ?>" title="lihat detail">
                             <?php echo $data['nama_bantuan'] ?>
                         </a>
                     </td>
                     <td>
-                        <?php echo $data['tgl_bantuan'] ?>
+                        <?php echo FormatTanggal($data['tgl_bantuan']) ?>
                     </td>
                     <td>
                         <div class="mb-1">

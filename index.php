@@ -21,14 +21,12 @@
 <?php
 session_start();
 $status = $_SESSION['status'] ?? '';
-$level = $_SESSION['level'] ?? '';
 $isLogin = $_SESSION['isLogin'] ?? '';
+$isLoginUser = $_SESSION['isLoginUser'] ?? '';
 if ($isLogin == "logged") {
-    if ($level == "admin desa") {
-        header("location: dashboard-admin.php");
-    } else {
-        header("location: dashboard-user.php");
-    }
+    header("location: dashboard-admin.php");
+} else if ($isLoginUser == "logged") {
+    header("location: dashboard-user.php");
 }
 ?>
 

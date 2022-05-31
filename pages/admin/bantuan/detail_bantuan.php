@@ -12,6 +12,12 @@ WHERE detail_bantuan.id_bantuan = $id";
 $query2 = $koneksi->query($sql2);
 
 $no = 1;
+
+function formatTanggal($date)
+{
+    $datetime = DateTime::createFromFormat('Y-m-d', $date);
+    return $datetime->format('d M Y');
+}
 ?>
 
 <p style="font-size: 20px;">
@@ -28,7 +34,7 @@ $no = 1;
     <div class="col-lg-6 mb-3">
         <p>
             <b><i class="mdi mdi-calendar"></i> Tanggal</b><br />
-            <?php echo $data['tgl_bantuan'] ?>
+            <?php echo formatTanggal($data['tgl_bantuan']) ?>
         </p>
     </div>
     <div class="col-lg-6 mb-3">

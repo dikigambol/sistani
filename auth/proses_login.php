@@ -15,11 +15,13 @@ if ($type == "login") {
         $_SESSION['nama'] = $data['nama'];
         $_SESSION['username'] = $data['username'];
         $_SESSION['level'] = $data['nama_level'];
-        $_SESSION['isLogin'] = 'logged';
         $level = $data['nama_level'] ?? "";
+        $_SESSION['isForum'] = "yes";
         if ($level == "admin desa") {
+            $_SESSION['isLogin'] = 'logged';
             header("location:../dashboard-admin.php");
         } else {
+            $_SESSION['isLoginUser'] = 'logged';
             header("location:../dashboard-user.php");
         }
     } else {
@@ -28,6 +30,8 @@ if ($type == "login") {
     }
 } else if ($type == "logout") {
     unset($_SESSION['isLogin']);
+    unset($_SESSION['isForum']);
+    unset($_SESSION['isLoginUser']);
     unset($_SESSION['nama']);
     unset($_SESSION['id_user']);
     unset($_SESSION['level']);

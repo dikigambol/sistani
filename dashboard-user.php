@@ -15,10 +15,32 @@
     <link rel="stylesheet" href="assets/mdi/css/materialdesignicons.css">
     <link href="assets/css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.css" rel="stylesheet">
+    </link>
 </head>
 
 <?php
+session_start();
 include 'baseUrl.php';
+include 'koneksi.php';
+$isLogin = $_SESSION['isLoginUser'] ?? '';
+if ($isLogin != "logged") {
+    header("location: index.php");
+}
+$status = $_SESSION['status'] ?? '';
+$deskripsi = $_SESSION['deskripsi'] ?? '';
+$id_user = $_SESSION['id_user'] ?? "";
+$nama_lengkap = $_SESSION['nama'] ?? "";
+$level = $_SESSION['level'] ?? "";
+$username = $_SESSION['username'] ?? "";
+
+$keltanisql = "SELECT * FROM pengguna INNER JOIN anggota ON pengguna.id_pengguna = anggota.id_user 
+INNER JOIN kelompok_tani ON anggota.id_kelompok_tani = kelompok_tani.id_kelompok_tani WHERE pengguna.id_pengguna = $id_user";
+$querykeltani = $koneksi->query($keltanisql);
+$datakeltani = $querykeltani->fetch_array();
+$kelompoktani = $datakeltani['nama_kelompok_tani'] ?? "-";
+$idkelompoktani = $datakeltani['id_kelompok_tani'] ?? "-";
+$jabatankeltani = $datakeltani['jabatan'] ?? "-";
 ?>
 
 <body id="page-top">
@@ -29,7 +51,6 @@ include 'baseUrl.php';
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="index.php#mainNav">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link" href="forum.php">Forum</a></li>
                     <li class="nav-item"><a class="nav-link active" href="dashboard-user.php">Dashboard</a></li>
                 </ul>
@@ -48,11 +69,11 @@ include 'baseUrl.php';
                             <div class="box-nama">
                                 <p style="font-size: 18px;">
                                     <b>
-                                        Diki Akbar
+                                        <?php echo $nama_lengkap ?>
                                     </b>
                                 </p>
                                 <p style="font-size: 15px; color: grey; margin-top: -18px;">
-                                    <i class="mdi mdi-corn"></i> sinar tani
+                                    <i class="mdi mdi-corn"></i> <?php echo $kelompoktani?>
                                 </p>
                             </div>
                             <div class="navmenu">
@@ -60,7 +81,7 @@ include 'baseUrl.php';
                                     <li class="nav-item"><a class="nav-link nav-dash" href="dashboard-user.php" id="homeNav"><i class="mdi mdi-account-circle"></i> &nbsp;Akun Saya</a></li>
                                     <li class="nav-item"><a class="nav-link nav-dash" id="keltaniNav" href="dashboard-user.php?page=keltani"><i class="mdi mdi-account-multiple-outline"></i> &nbsp;Kelompok Tani</a></li>
                                     <li class="nav-item"><a class="nav-link nav-dash" href="dashboard-user.php?page=thread"><i class="mdi mdi-comment-multiple-outline"></i> &nbsp;Thread Saya</a></li>
-                                    <li class="nav-item"><a class="nav-link nav-dash" href="dashboard-user.php?page=jadwal"><i class="mdi mdi-calendar"></i> &nbsp;Jadwal</a></li>
+                                    <li class="nav-item"><a class="nav-link nav-dash" href="dashboard-user.php?page=jadwal"><i class="mdi mdi-calendar"></i> &nbsp;Agenda</a></li>
                                     <li class="nav-item"><a class="nav-link nav-dash" href="dashboard-user.php?page=bantuan"><i class="mdi mdi-ticket"></i> &nbsp;List Bantuan</a></li>
                                     <li class="nav-item"><a class="nav-link nav-dash" href="auth/proses_login.php?type=logout"><i class="mdi mdi-logout-variant"></i> &nbsp;Keluar</a></li>
                                 </ul>
@@ -89,6 +110,7 @@ include 'baseUrl.php';
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="assets/js/menu.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
 </body>
 
 <script>
@@ -135,5 +157,35 @@ include 'baseUrl.php';
         });
     });
 </script>
+
+
+<?php if ($status == 'sukses') { ?>
+    <script>
+        swal({
+            title: "Berhasil!",
+            type: "success",
+            text: 'Redirecting...',
+            timer: 2000,
+            showConfirmButton: false,
+            showCancelButton: false
+        }).then(function() {
+            window.location.reload();
+        })
+    </script>
+<?php } else if ($status == 'gagal') { ?>
+    <script>
+        swal({
+            title: "Gagal!",
+            type: "error",
+            text: '<?php echo $deskripsi ?>',
+            timer: 2000,
+            showConfirmButton: false,
+            showCancelButton: false
+        });
+    </script>
+<?php } ?>
+
+<?php unset($_SESSION['status']); ?>
+<?php unset($_SESSION['deskripsi']); ?>
 
 </html>
